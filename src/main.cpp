@@ -14,7 +14,7 @@ WiFiManager wifi;
 void setup() {
     M5.begin();
     Serial.begin(115200);
-
+    
     display.begin();
     wifi.connect();
     timer.begin();
@@ -23,6 +23,7 @@ void setup() {
 void loop() {
     buttons.update(timer);
     timer.update();
-    display.update(timer);
-    // delay(50);
+
+    if(timer.disp_isNeedUpdate())
+        display.update(timer);
 }
