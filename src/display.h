@@ -44,7 +44,7 @@ private:
         M5.Lcd.setCursor(10, 100);
         M5.Lcd.println("TABATA TIMER");
         M5.Lcd.setCursor(10, 150);
-        M5.Lcd.println("Press A to start");
+        M5.Lcd.println("Press B to start");
     }
 
     void drawWorkScreen(const TabataTimer &timer)
@@ -75,6 +75,6 @@ private:
         M5.Lcd.setCursor(10, 100);
         M5.Lcd.println("FINISHED!");
         M5.Lcd.setCursor(10, 150);
-        M5.Lcd.println("Press A to relaxart");
+        M5.Lcd.println("Press B to relaxart");
     }
 };
