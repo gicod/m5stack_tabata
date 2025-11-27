@@ -29,6 +29,9 @@ public:
         }
 
         if (M5.BtnC.wasPressed()) // break
+        {
             timer.begin();
+            timer.turnSound();
+        }
     }
 };

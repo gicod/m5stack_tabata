@@ -80,11 +80,18 @@ public:
         running = false;
     }
 
+    void turnSound()
+    {
+        soundIsOn = !soundIsOn;
+        playBuzzer();
+    }
+
     uint8_t getRound() const { return roundsCompleted; }
     bool isRunning() const { return running; }
     int getSec() const { return secCount; }
 
 private:
+    bool soundIsOn = true;
     bool dispNeedUpdate = false;
     bool running = false;
     uint8_t roundsCompleted = 0;
@@ -116,6 +123,7 @@ private:
 
     void playBuzzer()
     {
-        M5.Speaker.tone(BUZZER_FREQ, BUZZER_DURATION);
+        if(soundIsOn)
+            M5.Speaker.tone(BUZZER_FREQ, BUZZER_DURATION);
     }
 };
