@@ -116,6 +116,6 @@ private:
 
     void playBuzzer()
     {
-        // M5.Speaker.tone(BUZZER_FREQ, BUZZER_DURATION);
+        M5.Speaker.tone(BUZZER_FREQ, BUZZER_DURATION);
     }
 };
