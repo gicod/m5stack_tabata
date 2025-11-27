@@ -7,7 +7,7 @@ const char *const WIFI_PASS = "9264300695";
 
 // Tabata settings
 int TABATA_ROUNDS = 5;
-int WORK_TIME_S = 8;
+int WORK_TIME_S = 16;
 int RELAX_TIME_S = 4;
 
 // Display settings
