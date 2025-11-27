@@ -6,9 +6,9 @@ const char *const WIFI_SSID = "Xiaomi_217C";
 const char *const WIFI_PASS = "9264300695";
 
 // Tabata settings
-int TABATA_ROUNDS = 5;
-int WORK_TIME_S = 16;
-int RELAX_TIME_S = 4;
+int TABATA_ROUNDS = 10;
+int WORK_TIME_S = 20;
+int RELAX_TIME_S = 10;
 
 // Display settings
 constexpr uint16_t BACKGROUND_COLOR = BLACK;
