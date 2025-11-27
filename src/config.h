@@ -6,7 +6,7 @@ const char *const WIFI_SSID = "Xiaomi_217C";
 const char *const WIFI_PASS = "9264300695";
 
 // Tabata settings
-int TABATA_ROUNDS = 45;
+int TABATA_ROUNDS = 40;
 int WORK_TIME_S = 45;
 int RELAX_TIME_S = 15;
 
