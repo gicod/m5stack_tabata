@@ -5,14 +5,6 @@
 class TabataTimer
 {
 public:
-    enum State
-    {
-        START,
-        WORK,
-        RELAX,
-        FINISHED
-    };
-
     void begin()
     {
         reset();
@@ -44,55 +36,72 @@ public:
             return;
 
         secCheck();
-        if (state == WORK && secCount <= 0)
+        if (tabataState == RELAX && secCount <= 0)
         {
-            switchToRelax();
+            switchToWork();
             dispNeedUpdate = true;
         }
-        else if (state == RELAX && secCount <= 0)
+        else if (tabataState == WORK && secCount <= 0)
         {
             nextRound();
             dispNeedUpdate = true;
         }
     }
 
+    void reset()
+    {
+        running = false;
+        tabataState = START;
+        roundsCompleted = 0;
+        dispNeedUpdate = true;
+    }
+
     void start()
     {
-        if (roundsCompleted >= TABATA_ROUNDS)
+        if (tabataState == START)
+        {
             reset();
+            tabataState = RELAX;
+        }
         running = true;
-        state = WORK;
         millisLast = millis();
-        secCount = WORK_TIME_S;
+        secCount = getTrainingStageItems(tabataState).time_s;
+        dispNeedUpdate = true;
+    }
+
+    void resume()
+    {
+        running = true;
         dispNeedUpdate = true;
     }
 
     void pause()
     {
-        running = !running;
-        if (running)
-            millisLast = millis() - pauseTime;
-        dispNeedUpdate = true;
-    }
-
-    void reset()
-    {
         running = false;
-        state = START;
-        roundsCompleted = 0;
-        dispNeedUpdate = true;
     }
 
-    State getState() const { return state; }
-    uint8_t getRound() const { return roundsCompleted + 1; }
+    void turnSound()
+    {
+        soundIsOn = !soundIsOn;
+        playBuzzer();
+    }
+
+    uint8_t getRound() const { return roundsCompleted; }
     bool isRunning() const { return running; }
     int getSec() const { return secCount; }
 
 private:
-    void switchToRelax()
+    bool soundIsOn = true;
+    bool dispNeedUpdate = false;
+    bool running = false;
+    uint8_t roundsCompleted = 0;
+    unsigned long millisLast = 0;
+    int secCount = 0;
+
+    void switchToWork()
     {
-        state = RELAX;
-        secCount = RELAX_TIME_S;
+        tabataState = WORK;
+        secCount = getTrainingStageItems(tabataState).time_s;
         playBuzzer();
     }
 
@@ -101,27 +110,20 @@ private:
         roundsCompleted++;
         if (roundsCompleted >= TABATA_ROUNDS)
         {
-            state = FINISHED;
+            tabataState = FINISHED;
             running = false;
         }
         else
         {
-            state = WORK;
-            secCount = WORK_TIME_S;
+            tabataState = RELAX;
+            secCount = getTrainingStageItems(tabataState).time_s;
         }
         playBuzzer();
     }
 
     void playBuzzer()
     {
-        // M5.Speaker.tone(BUZZER_FREQ, BUZZER_DURATION);
+        if(soundIsOn)
+            M5.Speaker.tone(BUZZER_FREQ, BUZZER_DURATION);
     }
-
-    bool dispNeedUpdate = false;
-    bool running = false;
-    State state = START;
-    uint8_t roundsCompleted = 0;
-    unsigned long millisLast = 0;
-    unsigned long pauseTime = 0;
-    int secCount = 0;
 };
