@@ -2,24 +2,32 @@
 #include <M5Stack.h>
 #include "timer.h"
 
-class Buttons {
+class Buttons
+{
 public:
-    void update(TabataTimer& timer) {
+    void update(TabataTimer &timer)
+    {
         M5.update();
-        
-        if (M5.BtnA.wasPressed()) {
+
+        if (M5.BtnA.wasPressed())
+        {
             // Future functionality
         }
 
-        if (M5.BtnB.wasPressed()) {
-            if (timer.getState() == TabataTimer::IDLE || timer.getState() == TabataTimer::FINISHED) {
+        if (M5.BtnB.wasPressed())
+        {
+            if (timer.getState() == TabataTimer::START || timer.getState() == TabataTimer::FINISHED)
+            {
                 timer.start();
-            } else {
+            }
+            else
+            {
                 timer.pause();
             }
         }
-                
-        if (M5.BtnC.wasPressed()) {
+
+        if (M5.BtnC.wasPressed())
+        {
             timer.reset();
         }
     }

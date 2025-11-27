@@ -1,19 +1,21 @@
 #pragma once
+#include <M5Stack.h>
 
 // WiFi credentials
 const char *const WIFI_SSID = "Xiaomi_217C";
 const char *const WIFI_PASS = "9264300695";
 
 // Tabata settings
-constexpr int TABATA_ROUNDS = 4;
-constexpr int WORK_TIME_S = 10;  // 20 sec
-constexpr int RELAX_TIME_S = 5; // 10 sec
+int TABATA_ROUNDS = 5;
+int WORK_TIME_S = 16;
+int RELAX_TIME_S = 4;
 
 // Display settings
 constexpr uint16_t BACKGROUND_COLOR = BLACK;
-constexpr uint16_t TEXT_COLOR = WHITE;
-constexpr uint16_t WORK_COLOR = RED;
-constexpr uint16_t RELAX_COLOR = GREEN;
+constexpr uint16_t FUNNY_COLOR = ORANGE;
+constexpr uint16_t TEXT_COLOR = DARKGREY;
+constexpr uint16_t WORK_COLOR = GREEN;
+constexpr uint16_t RELAX_COLOR = RED;
 
 // Buzzer
 constexpr uint8_t BUZZER_PIN = 2;

@@ -7,7 +7,7 @@ class TabataTimer
 public:
     enum State
     {
-        IDLE,
+        START,
         WORK,
         RELAX,
         FINISHED
@@ -78,7 +78,7 @@ public:
     void reset()
     {
         running = false;
-        state = IDLE;
+        state = START;
         roundsCompleted = 0;
         dispNeedUpdate = true;
     }
@@ -119,7 +119,7 @@ private:
 
     bool dispNeedUpdate = false;
     bool running = false;
-    State state = IDLE;
+    State state = START;
     uint8_t roundsCompleted = 0;
     unsigned long millisLast = 0;
     unsigned long pauseTime = 0;
