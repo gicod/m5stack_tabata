@@ -9,26 +9,25 @@ public:
     {
         M5.update();
 
-        if (M5.BtnA.wasPressed()) //pause
+        if (M5.BtnA.wasPressed()) // pause
         {
-            // Future functionality
-        }
-
-        if (M5.BtnB.wasPressed()) //start
-        {
-            if (timer.getState() == TabataTimer::START || timer.getState() == TabataTimer::FINISHED)
-            {
-                timer.start();
-            }
-            else
-            {
+            if (tabataState == WORK || tabataState == RELAX)
                 timer.pause();
-            }
+            if (tabataState == FINISHED)
+                timer.begin();
         }
 
-        if (M5.BtnC.wasPressed()) //break
+        if (M5.BtnB.wasPressed()) // start
         {
-            timer.reset();
+            if (tabataState == START || tabataState == FINISHED)
+                timer.start();
+            if (tabataState == RELAX || tabataState == RELAX)
+                timer.resume();
+            if (tabataState == FINISHED)
+                timer.begin();
         }
+
+        if (M5.BtnC.wasPressed()) // break
+            timer.begin();
     }
 };

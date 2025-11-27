@@ -9,33 +9,25 @@ public:
     void begin()
     {
         M5.Lcd.fillScreen(BACKGROUND_COLOR);
-        M5.Lcd.setSwapBytes(true); // быстрее заливка
-        M5.Lcd.setBrightness(180); // фиксируем яркость, убираем авто-мерцание
+        M5.Lcd.setSwapBytes(true); //? быстрее заливка
+        M5.Lcd.setBrightness(180); //? фиксируем яркость, убираем авто-мерцание
     }
 
     void update(const TabataTimer &timer)
     {
-        switch (timer.getState())
-        {
-        case TabataTimer::START:
+        if (tabataState == START)
             drawStartScreen();
-            break;
-        case TabataTimer::WORK:
-            drawTrainingScreen(timer, workStage);
-            break;
-            case TabataTimer::RELAX:
-            drawTrainingScreen(timer, relaxStage);
-            break;
-        case TabataTimer::FINISHED:
+        else if (tabataState == WORK || tabataState == RELAX)
+            drawTrainingScreen(timer, getTrainingStageItems(tabataState));
+        else if (tabataState == FINISHED)
             drawFinishedScreen();
-            break;
-        }
     }
 
 // private:
     int32_t totalTime = 0;
     void drawStartScreen()
-    {
+    {        
+        M5.Lcd.fillScreen(BACKGROUND_COLOR);
         M5.Lcd.setTextSize(2);
         M5.Lcd.setTextColor(TEXT_COLOR);
         M5.Lcd.setCursor(10, 4);
@@ -86,9 +78,9 @@ public:
             M5.Lcd.fillRect(0, 20, 320, 200, BACKGROUND_COLOR);
             M5.Lcd.setTextColor(FUNNY_COLOR);
             M5.Lcd.setTextSize(2);
-            M5.Lcd.setCursor(40,30);
+            M5.Lcd.setCursor(40, 30);
             M5.Lcd.printf("Completed rounds:%d", timer.getRound());
-            M5.Lcd.setCursor(40,50);
+            M5.Lcd.setCursor(40, 50);
             M5.Lcd.printf("Total time:");
             M5.Lcd.setTextSize(5);
             M5.Lcd.setCursor(40, 85);
