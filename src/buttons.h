@@ -9,12 +9,12 @@ public:
     {
         M5.update();
 
-        if (M5.BtnA.wasPressed())
+        if (M5.BtnA.wasPressed()) //pause
         {
             // Future functionality
         }
 
-        if (M5.BtnB.wasPressed())
+        if (M5.BtnB.wasPressed()) //start
         {
             if (timer.getState() == TabataTimer::START || timer.getState() == TabataTimer::FINISHED)
             {
@@ -26,7 +26,7 @@ public:
             }
         }
 
-        if (M5.BtnC.wasPressed())
+        if (M5.BtnC.wasPressed()) //break
         {
             timer.reset();
         }
